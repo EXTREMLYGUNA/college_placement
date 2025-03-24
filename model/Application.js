@@ -2,7 +2,7 @@ import mongoose from "../database/connectToDatabase.js";
 import validators from '../utils/validators.js'
 import { generateRandString } from "../utils/helper.js";
 
-const studentSchema = new mongoose.Schema({
+const applicationSchema = new mongoose.Schema({
     id:{
         type: String,
         default:function(){
@@ -21,14 +21,18 @@ const studentSchema = new mongoose.Schema({
                     message: props => `${props.value} is not a valid email`
                 }
     },
-    password:{
-        type:String,
-        required:[true,'Password is required']
-    },
     birth:{
         type:String,
         required:[true, "birth is required"]
     },
+    mobile:{
+            type: String, 
+            required: [true, "Mobile is required"],
+            validate:{
+                validator: validators.validateMobile,
+                message: props => `${props.value} is not a valid mobile number`
+            }
+        },
     age:{
         type: String,
         required: [true, "age is required"]
@@ -38,7 +42,8 @@ const studentSchema = new mongoose.Schema({
         required:[true, "address is required"]
     },
     resume:{
-        type:String
+        type:String,
+        required:[true, "File need to be upload"]
     },
     gender:{
         type:String,
@@ -49,14 +54,6 @@ const studentSchema = new mongoose.Schema({
         },
         default: 'Select'
     },
-    mobile:{
-        type: String, 
-        required: [true, "Mobile is required"],
-        validate:{
-            validator: validators.validateMobile,
-            message: props => `${props.value} is not a valid mobile number`
-        }
-    },
     status:{
         type: String,
         required: [true, "status is required"],
@@ -66,22 +63,18 @@ const studentSchema = new mongoose.Schema({
         },
         default: 'In-Active'
     },
-    role:{
-        type: String,
-        enum: {
-            values: ['Student','Admin'],
-            message: '{VALUE} is not supported'
-        },
-        default: 'Student'
+    userId:{
+        type:String,
+        required:[true,'userId is required']
     },
     createdAt:{
         type: Date,
         default: Date.now()
     }
 },{
-    collection:"users",
+    collection:"application",
     versionKey:false
 })
 
-const Students = mongoose.model("users",studentSchema);
-export default Students
+const applicationUser = mongoose.model("application",applicationSchema);
+export default applicationUser
