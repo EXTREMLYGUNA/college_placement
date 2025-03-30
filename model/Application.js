@@ -1,4 +1,4 @@
-import mongoose from "../database/connectToDatabase.js";
+import {mongoose} from "../database/connectToDatabase.js";
 import validators from '../utils/validators.js'
 import { generateRandString } from "../utils/helper.js";
 
