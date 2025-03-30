@@ -42,7 +42,7 @@ const applicationSchema = new mongoose.Schema({
         required:[true, "address is required"]
     },
     resume:{
-        type:String,
+        type:Object,
         required:[true, "File need to be upload"]
     },
     gender:{

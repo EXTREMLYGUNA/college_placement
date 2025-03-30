@@ -8,4 +8,4 @@ router.post('/create',ApplicationController.createApplication)
 router.post('/editUser/:id',ApplicationController.editApplication)
 router.delete('/deleteUser/:id',ApplicationController.deleteApplication)
 
-export default router
+export default router 
