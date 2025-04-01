@@ -45,6 +45,23 @@ const ApplicationAll = async (req,res)=>{
     }
 }
 
+const getAppllicationOne = async (req,res)=>{
+    try {
+        const {id} = req.params
+        const student = await applicationUser.find({id:id},{_id:0})
+                res.status(200).send({
+                    messgae:"Student fetched successfully",
+                    data: student
+                })
+    } catch (error) {
+        console.log({error: "Fetching error occured"});
+        res.status(500).send({
+            messgae: error.message || `Internal server Failure`,
+            error
+        })
+    }
+}
+
 
 const createApplication = async (req,res)=>{
     try {
@@ -131,4 +148,4 @@ const deleteApplication = async (req,res)=>{
 }
 
 
-export default { ApplicationAll, createApplication, editApplication, deleteApplication}
+export default { ApplicationAll, getAppllicationOne, createApplication, editApplication, deleteApplication}
